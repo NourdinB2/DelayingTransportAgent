@@ -39,24 +39,30 @@ Install-TransportAgent -Name "DelayingRoutingAgent" -TransportAgentFactory "Dela
 
 ==================================================================================================================================================
 # A sample script for automating agent installation.
+# Must be run elevated due to service stop and start.
 # Script starts here.
-$EXDIR="c:\program files\microsoft\exchange server"
-Stop-Service MSExchangeTransport
+$ExchangeInstallPath = (Get-ItemProperty -path HKLM:\SOFTWARE\Microsoft\ExchangeServer\v15\Setup -Name MsiInstallPath).MsiInstallPath
+If ($false -eq [String]::IsNullOrEmpty($ExchangeInstallPath))
+{
+	$TargetDir = join-path -Path $ExchangeInstallpath -ChildPath TransportRoles\agents\SmtpAgents\DelayingRoutingAgent
 
-write-output "Creating directories"
-new-item -Type Directory -path $EXDIR\TransportRoles\agents\SmtpAgents\DelayingRoutingAgent -ErrorAction SilentlyContinue
+	Stop-Service MSExchangeTransport
 
-write-output "Copying files"
-copy-item bin\debug\DelayingRoutingAgent.dll $EXDIR\TransportRoles\agents\SmtpAgents\DelayingRoutingAgent -force
-copy-item bin\debug\DelayingRoutingAgent.pdb $EXDIR\TransportRoles\agents\SmtpAgents\DelayingRoutingAgent -force
+	write-output "Creating directories"
+	new-item -Type Directory -path $TargetDIR -ErrorAction SilentlyContinue
 
-write-output "Registering agent"
-install-transportagent -Name "DelayingRoutingAgent" -AssemblyPath $EXDIR\TransportRoles\agents\SmtpAgents\DelayingRoutingAgent\DelayingRoutingAgent.dll -TransportAgentFactory "DelayingRoutingAgent.StripLinkReceiveAgentFactory"
+	write-output "Copying files"
+	copy-item .\bin\debug\DelayingRoutingAgent.dll $TargetDIR -force
+	copy-item .\bin\debug\DelayingRoutingAgent.pdb $TargetDIR -force
 
-write-output "Enabling agent"
-enable-transportagent -Identity "DelayingRoutingAgent" 
-get-transportagent -Identity "DelayingRoutingAgent" 
+	write-output "Registering agent"
+	install-transportagent -Name "DelayingRoutingAgent" -AssemblyPath $TargetDIR\DelayingRoutingAgent.dll -TransportAgentFactory "DelayingRoutingAgent.DelayingRoutingAgentFactory"
 
-Start-Service MSExchangeTransport
+	write-output "Enabling agent"
+	enable-transportagent -Identity "DelayingRoutingAgent" 
+	get-transportagent -Identity "DelayingRoutingAgent" 
+
+	Start-Service MSExchangeTransport
+}
 # Script ends here.
 ==================================================================================================================================================
