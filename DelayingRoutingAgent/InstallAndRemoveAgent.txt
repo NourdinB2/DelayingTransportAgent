@@ -7,7 +7,8 @@ command to enable your agent.
 
 Caution: 
 Transport agents have full access to all e-mail messages that they encounter. Exchange 2013 does not restrict the behavior of
-a transport agent. Transport agents that are unstable or that contain security flaws may affect the stability and security of Exchange 2013. Therefore, you must only install transport agents that you fully trust and that have been fully tested. 
+a transport agent. Transport agents that are unstable or that contain security flaws may affect the stability and security of Exchange 2013. 
+Therefore, you must only install transport agents that you fully trust and that have been fully tested. 
 
 
 When you use the Install-TransportAgent cmdlet to install an agent, the Exchange Management Shell keeps a lock on the assembly.
@@ -22,8 +23,8 @@ Install-TransportAgent -Name "MyCustomAgent" -TransportAgentFactory "MyAgents.My
 This example names the agent MyCustomAgent on the server on which the agent is installed. The following example shows you how to enable the agent named MyCustomAgent.
 
 Enable-TransportAgent -Name "MyCustomAgent"
-
 ===========================================================================
+
 
 Install-TransportAgent -Name DelayRoutingAgent -TransportAgentFactory DelayingRoutingAgent.DelayingRoutingAgentFactory -AssemblyPath "C:\Program Files\Microsoft\Exchange Server\V15\TransportRoles\agents\DelayingRoutingAgent\DelayingRoutingAgent.dll"
 
@@ -37,6 +38,8 @@ Install-TransportAgent -Name "DelayingRoutingAgent" -TransportAgentFactory "Dela
 
 
 ==================================================================================================================================================
+# A sample script for automating agent installation.
+# Script starts here.
 $EXDIR="c:\program files\microsoft\exchange server"
 Stop-Service MSExchangeTransport
 
@@ -55,4 +58,5 @@ enable-transportagent -Identity "DelayingRoutingAgent"
 get-transportagent -Identity "DelayingRoutingAgent" 
 
 Start-Service MSExchangeTransport
+# Script ends here.
 ==================================================================================================================================================
