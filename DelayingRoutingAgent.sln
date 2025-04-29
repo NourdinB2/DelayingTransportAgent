@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DelayingRoutingAgent", "DelayingRoutingAgent\DelayingRoutingAgent.csproj", "{A03B1EF1-37D3-4593-B718-ADBC84329E9B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A03B1EF1-37D3-4593-B718-ADBC84329E9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A03B1EF1-37D3-4593-B718-ADBC84329E9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A03B1EF1-37D3-4593-B718-ADBC84329E9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A03B1EF1-37D3-4593-B718-ADBC84329E9B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9DABB448-3F5B-4192-8214-287A38BEF29D}
+	EndGlobalSection
+EndGlobal

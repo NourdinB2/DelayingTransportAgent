@@ -1,0 +1,10 @@
+C:\Data\Repos\DelayingRoutingAgent\DelayingRoutingAgent\bin\Debug\DelayingRoutingAgent.dll
+C:\Data\Repos\DelayingRoutingAgent\DelayingRoutingAgent\bin\Debug\DelayingRoutingAgent.pdb
+C:\Data\Repos\DelayingRoutingAgent\DelayingRoutingAgent\bin\Debug\Microsoft.Exchange.Data.Common.dll
+C:\Data\Repos\DelayingRoutingAgent\DelayingRoutingAgent\bin\Debug\Microsoft.Exchange.Data.dll
+C:\Data\Repos\DelayingRoutingAgent\DelayingRoutingAgent\bin\Debug\Microsoft.Exchange.Data.Transport.dll
+C:\Data\Repos\DelayingRoutingAgent\DelayingRoutingAgent\obj\Debug\DelayingRoutingAgent.csproj.AssemblyReference.cache
+C:\Data\Repos\DelayingRoutingAgent\DelayingRoutingAgent\obj\Debug\DelayingRoutingAgent.csproj.CoreCompileInputs.cache
+C:\Data\Repos\DelayingRoutingAgent\DelayingRoutingAgent\obj\Debug\DelayingRoutingAgent.csproj.CopyComplete
+C:\Data\Repos\DelayingRoutingAgent\DelayingRoutingAgent\obj\Debug\DelayingRoutingAgent.dll
+C:\Data\Repos\DelayingRoutingAgent\DelayingRoutingAgent\obj\Debug\DelayingRoutingAgent.pdb

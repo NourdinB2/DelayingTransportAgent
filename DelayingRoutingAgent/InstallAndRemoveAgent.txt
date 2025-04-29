@@ -1,0 +1,58 @@
+﻿Installing and Enabling an Agent
+
+--------------------------------------------------------------------------------
+After you compile your agent to a DLL, you must install and enable the agent on your development Exchange server. 
+In the Exchange Management Shell, use the Install-TransportAgent command to install your agent, and the Enable-TransportAgent
+command to enable your agent.
+
+Caution: 
+Transport agents have full access to all e-mail messages that they encounter. Exchange 2013 does not restrict the behavior of
+a transport agent. Transport agents that are unstable or that contain security flaws may affect the stability and security of Exchange 2013. Therefore, you must only install transport agents that you fully trust and that have been fully tested. 
+
+
+When you use the Install-TransportAgent cmdlet to install an agent, the Exchange Management Shell keeps a lock on the assembly.
+To release the lock on the assembly, you must close the instance of the management shell that you used to install the agent.
+You will be unable to update the assembly until you release the lock.
+
+The following example shows you how to use the Exchange Management Shell to install and enable an agent named MyAgent
+by using a class derived from SmtpReceiveAgentFactory named MyAgents.MyAgentFactory.
+
+Install-TransportAgent -Name "MyCustomAgent" -TransportAgentFactory "MyAgents.MyAgentFactory" -AssemblyPath "C:\myagents\MyAgent.dll"
+
+This example names the agent MyCustomAgent on the server on which the agent is installed. The following example shows you how to enable the agent named MyCustomAgent.
+
+Enable-TransportAgent -Name "MyCustomAgent"
+
+===========================================================================
+
+Install-TransportAgent -Name DelayRoutingAgent -TransportAgentFactory DelayingRoutingAgent.DelayingRoutingAgentFactory -AssemblyPath "C:\Program Files\Microsoft\Exchange Server\V15\TransportRoles\agents\DelayingRoutingAgent\DelayingRoutingAgent.dll"
+
+Enable-TransportAgent -Identity "DelayingRoutingAgent"
+Disable-TransportAgent -Identity "DelayingRoutingAgent"
+Uninstall-TransportAgent -Identity "DelayingRoutingAgent"
+
+
+RoutingAgent:
+Install-TransportAgent -Name "DelayingRoutingAgent" -TransportAgentFactory "DelayingRoutingAgent.DelayingRoutingAgentFactory" -AssemblyPath "C:\Program Files\Microsoft\Exchange Server\V15\TransportRoles\agents\SmtpAgents\DelayingRoutingAgent\DelayingRoutingAgent.dll"
+
+
+==================================================================================================================================================
+$EXDIR="c:\program files\microsoft\exchange server"
+Stop-Service MSExchangeTransport
+
+write-output "Creating directories"
+new-item -Type Directory -path $EXDIR\TransportRoles\agents\SmtpAgents\DelayingRoutingAgent -ErrorAction SilentlyContinue
+
+write-output "Copying files"
+copy-item bin\debug\DelayingRoutingAgent.dll $EXDIR\TransportRoles\agents\SmtpAgents\DelayingRoutingAgent -force
+copy-item bin\debug\DelayingRoutingAgent.pdb $EXDIR\TransportRoles\agents\SmtpAgents\DelayingRoutingAgent -force
+
+write-output "Registering agent"
+install-transportagent -Name "DelayingRoutingAgent" -AssemblyPath $EXDIR\TransportRoles\agents\SmtpAgents\DelayingRoutingAgent\DelayingRoutingAgent.dll -TransportAgentFactory "DelayingRoutingAgent.StripLinkReceiveAgentFactory"
+
+write-output "Enabling agent"
+enable-transportagent -Identity "DelayingRoutingAgent" 
+get-transportagent -Identity "DelayingRoutingAgent" 
+
+Start-Service MSExchangeTransport
+==================================================================================================================================================
